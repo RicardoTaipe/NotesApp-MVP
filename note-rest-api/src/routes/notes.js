@@ -5,7 +5,7 @@ const router = express.Router();
 
 const mysqlConnection = require("../database");
 
-//Retrieve all employees from mysql db
+//Retrieve all notes from mysql db
 router.get("/", (req, res) => {
   mysqlConnection.query("SELECT * FROM notes;", (err, rows, fields) => {
     if (!err) {
@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
   });
 });
 
-//Retrieve an specific employee
+//Retrieve an specific note
 router.get("/:id", (req, res) => {
   const { id } = req.params;
   //avoid sql injection
@@ -33,7 +33,7 @@ router.get("/:id", (req, res) => {
   );
 });
 
-//Create a new employee
+//Create a new note
 router.post("/", (req, res) => {
   const { title, note } = req.body;
   const query = `INSERT INTO notes (title,note) VALUES (?,?);`;
@@ -47,7 +47,7 @@ router.post("/", (req, res) => {
   });
 });
 
-//Update an employee
+//Update an note
 router.put("/", (req, res) => {
   //const { id } = req.params;
   const { id, title, note } = req.body;
@@ -61,7 +61,7 @@ router.put("/", (req, res) => {
   });
 });
 
-//Delete employee by id
+//Delete note by id
 router.delete("/:id", (req, res) => {
   const { id } = req.params;
   console.log(req.body);
